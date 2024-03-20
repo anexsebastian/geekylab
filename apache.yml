@@ -1,0 +1,27 @@
+---
+- name: Deploy Docker container running Apache
+  hosts: localhostX
+  become: true
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Pull Apache Docker image
+      docker_image:
+        name: httpd
+        state: present
+
+    - name: Run Apache container
+      docker_container:
+        name: apache_container
+        image: httpd
+        ports:
+          - "80:80"
+        detach: true
+
+    - name: Copy static web page files
+      copy:
+        src: /home/kali/apache.yml
+        dest: /var/www/html/

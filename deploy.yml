@@ -1,0 +1,8 @@
+---
+- name: apache.yml
+  hosts: kali
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "welcome to my playbook"
+
